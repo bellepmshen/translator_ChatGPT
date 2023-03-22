@@ -28,5 +28,5 @@ specify
 ## Notes:
 
 1. The reason why I break down the document into paragraphs is because I found out ChatGPT would perform better once you feed it few paragraphs, not the whole document.
-2. If the prompt message is clear, ChatGPT will also perform better, so feel free the revise the prompt message in the 'translate' function in translator.py
+2. If the prompt message is clear, ChatGPT will also perform better, so feel free to revise the prompt message in the 'translate' function in translator.py
 3. The sample paper was provided by the first author, S. H. Hsieh from National Synchrotron Radiation Research Center (NSRRC), Hsinchu, Taiwan
