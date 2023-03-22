@@ -19,7 +19,7 @@ specify
     - Input: 
         - give the language you'd like to ChatGPT to translate
         - give the absolute path of the PDF file (w/ the PDF filename)
-        - the script will ask you to put some words in the first and last paragraphs you'd like to start and end translation.
+        - the script will ask you to put some words in the first and last paragraphs you'd like to start and end translation (see Notes for more details).
             - This is because we do not need to translate the authors' group or citation information.
     - Output:
         - before directory: This directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files BEFORE translation.
@@ -29,4 +29,4 @@ specify
 
 1. The reason why I break down the document into paragraphs is because I found out ChatGPT would perform better once you feed it few paragraphs, not the whole document.
 2. If the prompt message is clear, ChatGPT will also perform better, so feel free to revise the prompt message in the 'translate' function in translator.py
-3. The sample paper was provided by the first author, S. H. Hsieh from National Synchrotron Radiation Research Center (NSRRC), Hsinchu, Taiwan
+3. The words from first and last paragraphs will be recommended to select text only (avoid numbers, scientific notations or math formulas).
