@@ -14,13 +14,13 @@ specify
 
 1. Create a new directory and put extract_text.py, translator.py, main.ipynb and the PDF file in this directory.
 2. Create a Python file named 'api_key.py' under the same directory and put your API key here
-    - format: api_key =  'your api key from OpenAI'
-3. run main.ipynb
-    - input: 
+    - Format: api_key =  'your api key from OpenAI'
+3. Run main.ipynb
+    - Input: 
         - give the language you'd like to ChatGPT to translate
         - give the absolute path of the PDF file (w/ the PDF filename)
         - the script will ask you to put some words in the first and last paragraphs you'd like to start and end translation.
             - This is because we do not need to translate the authors' group or citation information.
-    - output:
+    - Output:
         - before directory: This directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files BEFORE translation.
         - after directory: his directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files AFTER translation. The filename 'merge_translation.txt' is the file you'd like to see after translation.
