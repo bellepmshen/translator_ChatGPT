@@ -24,3 +24,9 @@ specify
     - Output:
         - before directory: This directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files BEFORE translation.
         - after directory: his directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files AFTER translation. The filename 'merge_translation.txt' is the file you'd like to see after translation.
+
+## Notes:
+
+1. The reason why I break down the document into paragraphs is because I found out ChatGPT would perform better once you feed it few paragraphs, not the whole document.
+2. If the prompt message is clear, ChatGPT will also perform better, so feel free the revise the prompt message in the 'translate' function in translator.py
+3. The sample paper was provided by the first author, S. H. Hsieh from National Synchrotron Radiation Research Center (NSRRC), Hsinchu, Taiwan
