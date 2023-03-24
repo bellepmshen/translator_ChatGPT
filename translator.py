@@ -2,8 +2,10 @@
 
 import os
 import time
+import pickle
 import openai
 import api_key # this is your API key
+import platform
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -12,23 +14,25 @@ class Translator:
     """This class is to use ChatGPT 3.5 to translate English to Traditional Chinese.
     """
     
-    def __init__(self, path, language):
+    def __init__(self, language):
         """Initiate the class
 
         Parameters
         ----------
-        path : str
-            the path where the text files for translation locate
         language : str
             the language you want ChatGPT to translate into
         """
-        # checking if it is Mac or Windows file path
-        if '/' in path:
-            path = path + '/'
+        # get OS
+        os_type = platform.system()
+        # get current working directory
+        parent_dir = os.path.abspath(os.getcwd())
+
+        if os_type == 'Windows':
+            parent_dir = parent_dir + "\\"
+            path = parent_dir + "before\\"
         else:
-            path = path + '\\'
-        
-        parent_dir = path.split("before")[0]
+            parent_dir = parent_dir + "/"
+            path = parent_dir + "before/" 
         
         # get api key:
         key = api_key.api_key
@@ -87,10 +91,11 @@ class Translator:
         try:
             if before == True:
                 file_lst = os.listdir(self.path)
+                file_lst = [ i for i in file_lst if (i.endswith('.txt')) & (i.startswith('page'))]
             else:
                 file_lst = os.listdir(self.save_translation_path)
+                file_lst = [ i for i in file_lst if (i.endswith('.pickle')) & (i.startswith('page'))]
             
-            file_lst = [ i for i in file_lst if (i.endswith('.txt')) & (i.startswith('page'))]
             # print(file_lst)
             metadata = pd.DataFrame(file_lst, columns = ['file_name'])
             
@@ -140,7 +145,7 @@ class Translator:
                 location = self.path + fname
             else:
                 location = self.save_translation_path + fname
-            with open(location, 'r') as f:
+            with open(location, 'r', encoding = 'utf-8') as f:
                 doc = f.read()
             
             return doc
@@ -211,10 +216,10 @@ class Translator:
             
             # save the translation content:
             fname = original_filename.split(".")[0]
-            location = f"{self.save_translation_path}{fname}_translation.txt"
+            location = f"{self.save_translation_path}{fname}_translation.pickle"
             
-            with open(location, 'w') as f:
-                f.write(translation_content)
+            with open(location, 'ab') as f:
+                pickle.dump(translation_content, f)
             
             return df, translation_content
         
@@ -231,7 +236,7 @@ class Translator:
             the df with API log and the translation text
         """
         try:
-            for i in tqdm(range(len(self.metadata))[:2]):
+            for i in tqdm(range(len(self.metadata))):
                 
                 time.sleep(3)
                 fname = self.metadata['file_name'].iloc[i]
@@ -308,7 +313,9 @@ class Translator:
                 fname = self.t_metadata['file_name'].iloc[i]
                 same_page = self.t_metadata['check_same_page'].iloc[i]
                 # read the translation result:
-                doc = self.read_txt_file(fname, before=False)
+                location = self.save_translation_path + fname
+                with open(location, 'rb') as f:
+                    doc = pickle.load(f)
         
                 # break lines
                 doc = doc.replace("。", "。\n")
@@ -320,7 +327,7 @@ class Translator:
             
             # save the result:
             location = f"{self.save_translation_path}merge_translation.txt"     
-            with open(location, 'w') as f:
+            with open(location, 'w', encoding = 'utf-8') as f:
                 f.write(lang_translation)
             
             return lang_translation

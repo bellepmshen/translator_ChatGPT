@@ -1,6 +1,7 @@
 # Purpose:  This script is to extract text from a PDF file
 
 import os
+import platform
 import numpy as np
 import pypdfium2 as pdfium
 from nltk.tokenize import sent_tokenize
@@ -9,21 +10,21 @@ class PDF_to_Text:
     """This class is to extract text from a PDF file.
     """
     
-    def __init__(self, abs_file_path):
+    def __init__(self):
         """Initiate the class.
-
-        Parameters
-        ----------
-        abs_file_path : str
-            the path where the PDF file locates
         """
-        parent_dir, file_name = os.path.split(abs_file_path)
-        
-        # checking if it is Mac or Windows file path:
-        if '/' in parent_dir:
-            parent_dir = parent_dir + '/'
+        # get OS
+        os_type = platform.system()
+        # get current working directory
+        parent_dir = os.path.abspath(os.getcwd())
+
+        if os_type == 'Windows':
+            parent_dir = parent_dir + "\\"
+      
         else:
-            parent_dir = parent_dir + '\\'
+            parent_dir = parent_dir + "/" 
+
+        file_name = [i for i in os.listdir(parent_dir) if i.endswith(".pdf")][0]
         
         self.parent_dir = parent_dir
         self.file_name = file_name
@@ -292,7 +293,7 @@ class PDF_to_Text:
                     doc, self.path  = self.get_paragraph(v, k)
                     
                 print("finishing extracting")
-                return doc, self.path
+                return doc
         
         except Exception as err:
             print(err)
