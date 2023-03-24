@@ -18,7 +18,6 @@ specify
 3. Run main.ipynb
     - Input: 
         - give the language you'd like to ChatGPT to translate
-        - give the absolute path of the PDF file (w/ the PDF filename)
         - the script will ask you to put some words in the first and last paragraphs you'd like to start and end translation (see Notes for more details).
             - This is because we do not need to translate the authors' group or citation information.
     - Output:
