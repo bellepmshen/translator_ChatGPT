@@ -5,10 +5,20 @@ by using ChatGPT 3.5 via API call
 
 Here are the files for getting translation:
 
+If you would like to translate the whole range of a PDF file:
+
+1. extract_text_all.py: This is for extracting text from a given PDF file and break the whole document into paragraph level
+2. translator_all.py: This is to make API calls to ask ChatGPT to translate the text into the language we
+specify
+3. main_all.ipynb: This is the notebook to execute API calls and obtain the translated text.
+
+If you would like to specify where to start and end the translation in a PDF:
+
 1. extract_text.py: This is for extracting text from a given PDF file and break the whole document into paragraph level
 2. translator.py: This is to make API calls to ask ChatGPT to translate the text into the language we
 specify
 3. main.ipynb: This is the notebook to execute API calls and obtain the translated text.
+
 
 ## Instruction:
 
@@ -23,6 +33,7 @@ specify
     - Output:
         - before directory: This directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files BEFORE translation.
         - after directory: his directory will be created once you run main.ipynb and it stores the break-down paragraphs txt files AFTER translation. The filename 'merge_translation.txt' is the file you'd like to see after translation.
+4. same steps for using extract_text_all.py, translator_all.py, main_all.ipynb
 
 ## Notes:
 
