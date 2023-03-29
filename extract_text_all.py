@@ -1,4 +1,4 @@
-# Purpose:  This script is to extract text from a PDF file
+# Purpose:  This script is to whole extract text from a PDF file
 
 import os
 import numpy as np
